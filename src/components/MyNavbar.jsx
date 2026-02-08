@@ -25,8 +25,8 @@ import {
 
 const menuItems = [
   { text: "Prophet Forecast", path: "/forecastprophet", icon: <ChartIcon /> },
-  { text: "XGBoost Forecast", path: "/forecastxGBoost", icon: <TimelineIcon /> },
-  { text: "Random Forest Forecast", path: "/forecastRandom", icon: <BoltIcon /> },
+  { text: "XGBoost Forecast", path: "/", icon: <TimelineIcon /> },
+  { text: "Random Forest Forecast", path: "/", icon: <BoltIcon /> },
   { text: "Contact Us", path: "/contact", icon: <ContactIcon /> },
 ];
 
@@ -37,7 +37,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Navbar اصلی - مشکی با گرادیانت و افکت نئونی */}
       <AppBar
         position="fixed"
         elevation={0}
@@ -55,7 +54,6 @@ export default function Navbar() {
             minHeight: 70,
           }}
         >
-          {/* لوگو با گرادیانت نئونی */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <BoltIcon
               sx={{
@@ -82,7 +80,6 @@ export default function Navbar() {
             </Typography>
           </Box>
 
-          {/* منوی دسکتاپ - آیکون‌ها با hover نئونی */}
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 3 }}>
             {menuItems.map((item) => (
               <IconButton
@@ -109,7 +106,6 @@ export default function Navbar() {
             ))}
           </Box>
 
-          {/* دکمه همبرگر برای موبایل */}
           <IconButton
             edge="end"
             color="inherit"
@@ -122,7 +118,6 @@ export default function Navbar() {
         </Toolbar>
       </AppBar>
 
-      {/* Drawer سمت چپ برای موبایل */}
       <Drawer
         anchor="left"
         open={open}
@@ -164,7 +159,7 @@ export default function Navbar() {
                   sx={{
                     borderRadius: 2,
                     mb: 1,
-                    color: "#ffffff", // متن روشن
+                    color: "#ffffff",
                     "&:hover": {
                       bgcolor: "rgba(159, 122, 234, 0.15)",
                       color: "#9f7aea",
@@ -181,8 +176,7 @@ export default function Navbar() {
         </Box>
       </Drawer>
 
-      {/* برای جلوگیری از هم‌پوشانی محتوا با navbar ثابت */}
-      <Box sx={{ height: 70 }} />
+      {/* <Box sx={{ height: 70 }} /> */}
     </>
   );
 }
