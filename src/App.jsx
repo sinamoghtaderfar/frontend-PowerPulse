@@ -3,7 +3,7 @@ import { Toolbar } from '@mui/material';
 
 import MyNavbar from "./components/MyNavbar";
 import Homepage from "./pages/Home";
-import ForecastProphet from "./pages/ForecastProphet";
+import ForecastProphet from "./pages/Forecast";
 import Footer from "./components/Footer";
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
         <div className="AppMain">
           <Routes>
             <Route path="/" element={<Homepage />} />
-            <Route path="/ForecastProphet" element={<ForecastProphet />} />
+            <Route path="/Forecast" element={<ForecastProphet />} />
           </Routes>
         </div>
 

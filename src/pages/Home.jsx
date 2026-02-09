@@ -68,17 +68,17 @@ const LightningCanvas = () => {
     const createLightningBolt = (x1, y1, x2, y2, displacement = 15) => {
       const points = [];
       points.push({ x: x1, y: y1 });
-      
+
       const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
       const segments = Math.floor(distance / 20);
-      
+
       for (let i = 1; i < segments; i++) {
         const t = i / segments;
         const x = x1 + (x2 - x1) * t + (Math.random() - 0.5) * displacement;
         const y = y1 + (y2 - y1) * t + (Math.random() - 0.5) * displacement;
         points.push({ x, y });
       }
-      
+
       points.push({ x: x2, y: y2 });
       return points;
     };
@@ -92,18 +92,17 @@ const LightningCanvas = () => {
       ctx.lineJoin = 'round';
       ctx.shadowBlur = 15;
       ctx.shadowColor = color;
-      
+
       ctx.beginPath();
       ctx.moveTo(points[0].x, points[0].y);
-      
+
       for (let i = 1; i < points.length; i++) {
         ctx.lineTo(points[i].x, points[i].y);
       }
-      
+
       ctx.stroke();
       ctx.restore();
 
-      // ایجاد ذرات نور در انتهای جرقه
       const lastPoint = points[points.length - 1];
       for (let i = 0; i < 5; i++) {
         particlesRef.current.push(
@@ -129,7 +128,7 @@ const LightningCanvas = () => {
         const y1 = Math.random() * 50;
         const x2 = x1 + (Math.random() - 0.5) * 200;
         const y2 = y1 + 100 + Math.random() * 100;
-        
+
         const points = createLightningBolt(x1, y1, x2, y2, 25);
         drawLightning(points, 3, '#c084fc');
       }
@@ -154,7 +153,6 @@ const LightningCanvas = () => {
         return particle.alpha > 0;
       });
 
-      // ایجاد ذرات جدید
       if (particlesRef.current.length < 100) {
         particlesRef.current.push(
           new Particle(
@@ -171,7 +169,6 @@ const LightningCanvas = () => {
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    // شروع انیمیشن
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
     animate();
@@ -406,18 +403,29 @@ export default function Home() {
           >
             <Typography
               variant="h5"
-              color="grey.300"
               sx={{
-                maxWidth: 780,
+                maxWidth: 820,
                 mx: 'auto',
-                mb: 5,
-                lineHeight: 1.7,
+                mb: 6,
+                px: 2,
+                textAlign: 'center',
+                lineHeight: 1.8,
+                fontWeight: 400,
+                color: 'grey.300',
+                fontSize: {
+                  xs: '1rem',
+                  sm: '1.1rem',
+                  md: '1.25rem',
+                },
+                opacity: 0.9,
               }}
             >
               Advanced time series forecasting powered by cutting-edge machine learning models.
               <br />
-              Predict energy demand, prices, and trends with confidence.
+              Using historical energy consumption data from Germany, we estimate electricity
+              demand for the next 10 years with high accuracy and confidence.
             </Typography>
+
           </motion.div>
 
           <motion.div
@@ -429,7 +437,7 @@ export default function Home() {
               variant="contained"
               size="large"
               component={RouterLink}
-              to="/forecastprophet"
+              to="/Forecast"
               sx={{
                 px: 6,
                 py: 1.8,
@@ -467,7 +475,7 @@ export default function Home() {
           </motion.div>
         </Box>
 
-        {/* Electric Section با Canvas */}
+        {/* Electric Section  Canvas */}
         <Box
           sx={{
             position: 'relative',
@@ -589,12 +597,12 @@ export default function Home() {
                       repeatType: 'loop',
                     }}
                   >
-                    <ChartIcon 
-                      sx={{ 
-                        fontSize: 50, 
+                    <ChartIcon
+                      sx={{
+                        fontSize: 50,
                         color: '#c084fc',
                         filter: 'drop-shadow(0 0 8px rgba(192, 132, 252, 0.5))',
-                      }} 
+                      }}
                     />
                   </motion.div>
                 }
@@ -616,7 +624,7 @@ export default function Home() {
                   </motion.span>
                 }
                 description="Facebook's Prophet – excellent for handling seasonality, holidays, and missing data with interpretable results."
-                path="/forecastprophet"
+                path="/Forecast"
                 delay={0.2}
               />
             </Grid>
@@ -634,12 +642,12 @@ export default function Home() {
                       repeatType: 'loop',
                     }}
                   >
-                    <TimelineIcon 
-                      sx={{ 
-                        fontSize: 50, 
+                    <TimelineIcon
+                      sx={{
+                        fontSize: 50,
                         color: '#a78bfa',
                         filter: 'drop-shadow(0 0 8px rgba(167, 139, 250, 0.5))',
-                      }} 
+                      }}
                     />
                   </motion.div>
                 }
@@ -680,12 +688,12 @@ export default function Home() {
                       repeatType: 'loop',
                     }}
                   >
-                    <BoltIcon 
-                      sx={{ 
-                        fontSize: 50, 
+                    <BoltIcon
+                      sx={{
+                        fontSize: 50,
                         color: '#9f7aea',
                         filter: 'drop-shadow(0 0 12px rgba(159, 122, 234, 0.7))',
-                      }} 
+                      }}
                     />
                   </motion.div>
                 }
@@ -776,7 +784,7 @@ export default function Home() {
             variant="contained"
             size="large"
             component={RouterLink}
-            to="/forecastprophet"
+            to="/Forecast"
             sx={{
               px: 7,
               py: 1.8,
@@ -793,7 +801,7 @@ export default function Home() {
                 background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
                 transition: 'left 0.6s ease',
               },
-              '&:hover': { 
+              '&:hover': {
                 background: 'linear-gradient(90deg, #9f7aea, #d1b8ff)',
                 '&::before': {
                   left: '100%',
@@ -801,7 +809,7 @@ export default function Home() {
               },
             }}
           >
-            Launch Prophet Demo
+            Launch Forecasting
           </Button>
         </Box>
       </Container>

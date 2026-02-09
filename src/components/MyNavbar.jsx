@@ -24,7 +24,7 @@ import {
 } from "@mui/icons-material";
 
 const menuItems = [
-  { text: "Prophet Forecast", path: "/forecastprophet", icon: <ChartIcon /> },
+  { text: "Forecast", path: "/Forecast", icon: <ChartIcon /> },
   { text: "XGBoost Forecast", path: "/", icon: <TimelineIcon /> },
   { text: "Random Forest Forecast", path: "/", icon: <BoltIcon /> },
   { text: "Contact Us", path: "/contact", icon: <ContactIcon /> },
