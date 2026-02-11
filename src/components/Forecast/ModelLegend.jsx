@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { useModelHelpers } from "./forecastDataTransformers";
+import { useModelHelpers } from "../../hooks/forecastDataTransformers";
 
 export default function ModelLegend() {
   const { getModelDisplayName, getModelColor, models } = useModelHelpers();

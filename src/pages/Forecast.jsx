@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Container, Box, Typography } from "@mui/material";
 
-import { useForecastData } from "../components/Forecast/useForecastData";
+import { useForecastData } from "../hooks/useForecastData";
 import ForecastHeader from "../components/Forecast/ForecastHeader";
 import SingleModelView from "../components/Forecast/SingleModelView";
 import ComparisonView from "../components/Forecast/ComparisonView";

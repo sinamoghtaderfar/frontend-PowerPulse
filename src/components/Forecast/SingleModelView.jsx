@@ -2,7 +2,7 @@ import { Grid, Paper, Typography, Box } from "@mui/material";
 import ProphetChart from "./ProphetChart";
 import ProphetTable from "./ProphetTable";
 
-import { useSingleModelData, useModelHelpers } from "./forecastDataTransformers";
+import { useSingleModelData, useModelHelpers } from "../../hooks/forecastDataTransformers";
 
 export default function SingleModelView({ data, selectedModel, viewType }) {
   const { getModelDisplayName } = useModelHelpers();

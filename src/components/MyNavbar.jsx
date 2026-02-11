@@ -19,15 +19,13 @@ import {
   ShowChart as ChartIcon,
   ElectricBolt as BoltIcon,
   Timeline as TimelineIcon,
-  ContactMail as ContactIcon,
-  Brightness4 as DarkIcon,
 } from "@mui/icons-material";
 
 const menuItems = [
-  { text: "Forecast", path: "/Forecast", icon: <ChartIcon /> },
+  { text: "Germany Power Forecast", path: "/forecast", icon: <ChartIcon /> },
   { text: "XGBoost Forecast", path: "/", icon: <TimelineIcon /> },
   { text: "Random Forest Forecast", path: "/", icon: <BoltIcon /> },
-  { text: "Contact Us", path: "/contact", icon: <ContactIcon /> },
+  // { text: "Contact Us", path: "/contact", icon: <ContactIcon /> },
 ];
 
 export default function Navbar() {

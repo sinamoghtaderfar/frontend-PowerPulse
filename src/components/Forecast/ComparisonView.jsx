@@ -15,7 +15,7 @@ import { BarChart, CompareArrows, TableChart } from "@mui/icons-material";
 import ComparisonChart from "./ComparisonChart"; 
 import ModelLegend from "./ModelLegend";
 
-import { useCombinedChartData, useComparisonTableData } from "./forecastDataTransformers";
+import { useCombinedChartData, useComparisonTableData } from "../../hooks/forecastDataTransformers";
 
 const models = ["prophet", "random_forest", "xgboost"];
 
@@ -140,4 +140,4 @@ export default function ComparisonView({ data }) {
       </Paper>
     </Paper>
   );
-}
+} 

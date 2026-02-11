@@ -8,7 +8,7 @@ const MODEL_NAMES = {
 
 const MODEL_COLORS = {
   prophet: "#4285F4",
-  random: "#34A853",
+  random_forest: "#34A853",
   xgboost: "#EA4335"
 };
 

@@ -1,10 +1,10 @@
 import { useState, useCallback, useEffect } from "react";
-import { getAllForecasts } from "../../api/energyApi";
+import { getAllForecasts } from "../api/energyApi";
 
 export function useForecastData() {
   const [data, setData] = useState({
     prophet: [],
-    random: [],
+    random_forest: [],
     xgboost: []
   });
   const [loading, setLoading] = useState(true);
@@ -16,7 +16,7 @@ export function useForecastData() {
     setError(null);
     try {
       const allForecasts = await getAllForecasts(10);
-      setData(allForecasts);
+      setData(allForecasts.forecasts);
     } catch (err) {
       const message = err instanceof Error ? err.message : "Failed to load forecast data";
       setError(message);

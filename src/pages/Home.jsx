@@ -437,7 +437,7 @@ export default function Home() {
               variant="contained"
               size="large"
               component={RouterLink}
-              to="/Forecast"
+              to="/forecast"
               sx={{
                 px: 6,
                 py: 1.8,
@@ -624,7 +624,7 @@ export default function Home() {
                   </motion.span>
                 }
                 description="Facebook's Prophet – excellent for handling seasonality, holidays, and missing data with interpretable results."
-                path="/Forecast"
+                path="/forecast"
                 delay={0.2}
               />
             </Grid>
@@ -670,7 +670,7 @@ export default function Home() {
                   </motion.span>
                 }
                 description="High-performance gradient boosting model – captures complex non-linear patterns and feature interactions exceptionally well."
-                path="/forecastxGBoost"
+                path="/forecast"
                 delay={0.4}
               />
             </Grid>
@@ -716,7 +716,7 @@ export default function Home() {
                   </motion.span>
                 }
                 description="Robust ensemble method – great generalization, handles outliers, and provides feature importance for better understanding."
-                path="/forecastRandom"
+                path="/forecast"
                 delay={0.6}
               />
             </Grid>
@@ -784,7 +784,7 @@ export default function Home() {
             variant="contained"
             size="large"
             component={RouterLink}
-            to="/Forecast"
+            to="/forecast"
             sx={{
               px: 7,
               py: 1.8,
