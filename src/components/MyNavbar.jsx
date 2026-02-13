@@ -23,7 +23,7 @@ import {
 
 const menuItems = [
   { text: "Germany Power Forecast", path: "/forecast", icon: <ChartIcon /> },
-  { text: "XGBoost Forecast", path: "/", icon: <TimelineIcon /> },
+  { text: "Custom Forecast", path: "/customforecast", icon: <TimelineIcon /> },
   { text: "Random Forest Forecast", path: "/", icon: <BoltIcon /> },
   // { text: "Contact Us", path: "/contact", icon: <ContactIcon /> },
 ];

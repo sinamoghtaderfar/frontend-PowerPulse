@@ -4,6 +4,7 @@ import useScrollToTop from "../hooks/useScrollToTop";
 import MyNavbar from "../components/MyNavbar";
 import Homepage from "../pages/Home";
 import ForecastProphet from "../pages/Forecast";
+import CustomForecast from "../pages/customforecast";
 import Footer from "../components/Footer";
 
 function AppContent() {
@@ -17,6 +18,7 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/forecast" element={<ForecastProphet />} />
+          <Route path="/customforecast" element={<CustomForecast />} />
         </Routes>
       </div>
 
