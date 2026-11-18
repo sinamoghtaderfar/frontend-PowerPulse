@@ -1,4 +1,3 @@
-import React from "react";
 import CustomForecastForm from "../components/customforecast/CustomForecastForm";
 import { Box } from "@mui/material";
 
