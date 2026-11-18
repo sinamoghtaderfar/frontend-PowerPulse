@@ -14,6 +14,7 @@ import {
   ShowChart,
   TableChart
 } from "@mui/icons-material";
+import { MODEL_KEYS, getModelDisplayName } from "../../constants/models";
 
 export default function ForecastHeader({
   selectedModel,
@@ -23,15 +24,6 @@ export default function ForecastHeader({
   viewType,          
   onViewChange        
 }) {
-  const models = ["prophet", "random_forest", "xgboost"];
-  const getModelDisplayName = (model) => {
-    const names = {
-      prophet: "Prophet",
-      random_forest: "Random Forest",
-      xgboost: "XGBoost"
-    };
-    return names[model] || model;
-  };
   return (
     <Paper
       elevation={3}
@@ -51,6 +43,7 @@ export default function ForecastHeader({
       <TrendingUp fontSize="large" color="primary" sx={{ mb: 1 }} />
       <Typography
         variant="h4"
+        component="h1"
         sx={{
           mb: 1,
           fontWeight: 700,
@@ -65,7 +58,7 @@ export default function ForecastHeader({
       </Typography>
 
       <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 2 }}>
-        <InfoOutlined fontSize="small" sx={{ verticalAlign: "middle", mr: 1 }} />
+        <InfoOutlined aria-hidden fontSize="small" sx={{ verticalAlign: "middle", mr: 1 }} />
         Predictive analytics for future energy consumption
       </Typography>
 
@@ -76,8 +69,9 @@ export default function ForecastHeader({
           onChange={(e, newValue) => newValue !== null && onModelChange(newValue)}
           size="small"
           disabled={showComparison}
+          aria-label="Forecast model"
         >
-          {models.map((model) => (
+          {MODEL_KEYS.map((model) => (
             <ToggleButton key={model} value={model}>
               {getModelDisplayName(model)}
             </ToggleButton>
@@ -89,6 +83,7 @@ export default function ForecastHeader({
           color={showComparison ? "secondary" : "primary"}
           startIcon={<CompareArrows />}
           onClick={onToggleComparison}
+          aria-pressed={showComparison}
           size="small"
           sx={{ borderRadius: 2, textTransform: "none", fontWeight: 600 }}
         >
@@ -106,6 +101,7 @@ export default function ForecastHeader({
             }
           }}
           size="small"
+          aria-label="View type"
         >
           <ToggleButton value="chart">
             <ShowChart sx={{ mr: 1 }} />

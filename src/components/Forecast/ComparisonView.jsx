@@ -12,27 +12,20 @@ import {
 } from "@mui/material";
 import { BarChart, CompareArrows, TableChart } from "@mui/icons-material";
 
-import ComparisonChart from "./ComparisonChart"; 
+import { useMemo } from "react";
+import ComparisonChart from "./ComparisonChart";
 import ModelLegend from "./ModelLegend";
-
-import { useCombinedChartData, useComparisonTableData } from "../../hooks/forecastDataTransformers";
-
-const models = ["prophet", "random_forest", "xgboost"];
+import {
+  FORECAST_UNIT,
+  MODEL_KEYS,
+  getModelColor,
+  getModelDisplayName,
+} from "../../constants/models";
+import { toComparisonRows } from "../../utils/forecastTransforms";
+import { formatInterval, formatValue } from "../../utils/format";
 
 export default function ComparisonView({ data }) {
-  const combinedData = useCombinedChartData(data);
-  const comparisonTableData = useComparisonTableData(combinedData);
-
-  const getModelDisplayName = (model) => {
-    const names = { prophet: "Prophet", random_forest: "Random Forest", xgboost: "XGBoost" };
-    return names[model] || model;
-  };
-
-  const getModelColor = (model) => {
-    const colors = { prophet: "#4285F4", random_forest: "#34A853", xgboost: "#EA4335" };
-    return colors[model] || "#000000";
-  };
-
+  const rows = useMemo(() => toComparisonRows(data), [data]);
   return (
     <Paper
       elevation={2}
@@ -47,7 +40,7 @@ export default function ComparisonView({ data }) {
     >
       <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 3 }}>
         <BarChart color="secondary" />
-        <Typography variant="h5" fontWeight={700}>
+        <Typography variant="h5" component="h2" fontWeight={700}>
           Model Comparison
         </Typography>
         <Chip label="All Models" color="secondary" size="small" variant="outlined" />
@@ -57,8 +50,8 @@ export default function ComparisonView({ data }) {
         <Typography variant="h6" gutterBottom sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           <CompareArrows /> Combined Forecast Chart
         </Typography>
-        <Box sx={{ height: 460, mt: 2 }}>
-          <ComparisonChart data={combinedData} />
+        <Box sx={{ height: { xs: 340, md: 460 }, mt: 2 }}>
+          <ComparisonChart data={rows} />
         </Box>
 
         <ModelLegend />
@@ -70,7 +63,7 @@ export default function ComparisonView({ data }) {
         </Typography>
 
         <TableContainer>
-          <Table size="small" stickyHeader>
+          <Table size="small" stickyHeader aria-label="Forecast comparison by year and model">
             <TableHead>
               <TableRow>
                 <TableCell
@@ -84,7 +77,7 @@ export default function ComparisonView({ data }) {
                 >
                   Year
                 </TableCell>
-                {models.map((model) => (
+                {MODEL_KEYS.map((model) => (
                   <TableCell
                     key={model}
                     align="center"
@@ -94,15 +87,15 @@ export default function ComparisonView({ data }) {
                       color: getModelColor(model)
                     }}
                   >
-                    {getModelDisplayName(model)}
+                    {getModelDisplayName(model)} ({FORECAST_UNIT})
                   </TableCell>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
-              {comparisonTableData.map((row, index) => (
+              {rows.map((row, index) => (
                 <TableRow
-                  key={index}
+                  key={row.year}
                   sx={{
                     backgroundColor: index % 2 === 0 ? "transparent" : (theme) => theme.palette.action.hover
                   }}
@@ -118,16 +111,16 @@ export default function ComparisonView({ data }) {
                       zIndex: 1
                     }}
                   >
-                    {row.date}
+                    {row.year}
                   </TableCell>
-                  {models.map((model) => (
+                  {MODEL_KEYS.map((model) => (
                     <TableCell key={model} align="center">
                       <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
                         <Typography variant="body2" fontWeight={600}>
-                          {row[`${model}_forecast`] ?? "N/A"}
+                          {formatValue(row[model])}
                         </Typography>
                         <Typography variant="caption" color="text.secondary">
-                          [{row[`${model}_lower`] ?? "N/A"} – {row[`${model}_upper`] ?? "N/A"}]
+                          {formatInterval(row[`${model}_lower`], row[`${model}_upper`])}
                         </Typography>
                       </Box>
                     </TableCell>

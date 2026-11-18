@@ -13,6 +13,8 @@ export default function ForecastLoading() {
           minHeight: "60vh",
           gap: 3
         }}
+        role="status"
+        aria-live="polite"
       >
         <CircularProgress 
           size={60} 

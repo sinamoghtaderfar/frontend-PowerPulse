@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Box,
   Container,
@@ -36,7 +35,7 @@ const Footer = () => {
       <Container maxWidth="lg">
         <Grid container spacing={6}>
           {/*Abaut us*/}
-          <Grid item xs={12} md={4}>
+          <Grid size={{ xs: 12, md: 4 }}>
             <Typography
               variant="h5"
               fontWeight="bold"
@@ -60,6 +59,7 @@ const Footer = () => {
               <IconButton
                 component="a"
                 href="https://github.com/sinamoghtaderfar"
+                aria-label="GitHub"
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{
@@ -75,7 +75,9 @@ const Footer = () => {
               <IconButton
                 component="a"
                 href="https://linkedin.com/in/sinamoghtaderfar"
+                aria-label="LinkedIn"
                 target="_blank"
+                rel="noopener noreferrer"
                 sx={{
                   color: 'grey.400',
                   '&:hover': { color: '#0a66c2', transform: 'translateY(-3px)' },
@@ -89,7 +91,9 @@ const Footer = () => {
               <IconButton
                 component="a"
                 href="https://twitter.com/yourhandle"
+                aria-label="Twitter"
                 target="_blank"
+                rel="noopener noreferrer"
                 sx={{
                   color: 'grey.400',
                   '&:hover': { color: '#1da1f2', transform: 'translateY(-3px)' },
@@ -103,7 +107,9 @@ const Footer = () => {
               <IconButton
                 component="a"
                 href="https://instagram.com/yourprofile"
+                aria-label="Instagram"
                 target="_blank"
+                rel="noopener noreferrer"
                 sx={{
                   color: 'grey.400',
                   '&:hover': { color: '#e1306c', transform: 'translateY(-3px)' },
@@ -117,7 +123,7 @@ const Footer = () => {
           </Grid>
 
           {/*  Quick Links */}
-          <Grid item xs={6} sm={3} md={2}>
+          <Grid size={{ xs: 6, sm: 3, md: 2 }}>
             <Typography variant="subtitle1" fontWeight="bold" color="white" gutterBottom>
               Quick Links
             </Typography>
@@ -141,7 +147,7 @@ const Footer = () => {
           </Grid>
 
           {/*  Contact Us */}
-          <Grid item xs={6} sm={3} md={3}>
+          <Grid size={{ xs: 6, sm: 3, md: 3 }}>
             <Typography variant="subtitle1" fontWeight="bold" color="white" gutterBottom>
               Contact Us
             </Typography>
@@ -166,7 +172,7 @@ const Footer = () => {
           </Grid>
 
           {/*  Newsletter  */}
-          <Grid item xs={12} md={3}>
+          <Grid size={{ xs: 12, md: 3 }}>
             <Typography variant="subtitle1" fontWeight="bold" color="white" gutterBottom>
               Stay Updated
             </Typography>
