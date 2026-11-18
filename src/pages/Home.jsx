@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import {
   Box,
   Container,
@@ -20,6 +20,36 @@ import {
 import { motion } from 'framer-motion';
 import { Link as RouterLink } from 'react-router-dom';
 
+class Particle {
+  constructor(x, y, speedX, speedY, size, color) {
+    this.x = x;
+    this.y = y;
+    this.speedX = speedX;
+    this.speedY = speedY;
+    this.size = size;
+    this.color = color;
+    this.alpha = 1;
+    this.decay = Math.random() * 0.02 + 0.005;
+  }
+
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.alpha -= this.decay;
+    return this.alpha > 0;
+  }
+
+  draw(ctx) {
+    ctx.save();
+    ctx.globalAlpha = this.alpha;
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
 const LightningCanvas = () => {
   const canvasRef = useRef(null);
   const particlesRef = useRef([]);
@@ -34,36 +64,6 @@ const LightningCanvas = () => {
       canvas.width = container.clientWidth;
       canvas.height = container.clientHeight;
     };
-
-    class Particle {
-      constructor(x, y, speedX, speedY, size, color) {
-        this.x = x;
-        this.y = y;
-        this.speedX = speedX;
-        this.speedY = speedY;
-        this.size = size;
-        this.color = color;
-        this.alpha = 1;
-        this.decay = Math.random() * 0.02 + 0.005;
-      }
-
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        this.alpha -= this.decay;
-        return this.alpha > 0;
-      }
-
-      draw(ctx) {
-        ctx.save();
-        ctx.globalAlpha = this.alpha;
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      }
-    }
 
     const createLightningBolt = (x1, y1, x2, y2, displacement = 15) => {
       const points = [];
@@ -290,8 +290,6 @@ const FeatureCard = ({ icon, title, description, path, delay }) => {
 };
 
 export default function Home() {
-  const theme = useTheme();
-
   return (
     <Box
       sx={{
@@ -584,7 +582,7 @@ export default function Home() {
           </Box>
 
           <Grid container spacing={4} sx={{ position: 'relative', zIndex: 2 }}>
-            <Grid item xs={12} md={4}>
+            <Grid size={{ xs: 12, md: 4 }}>
               <FeatureCard
                 icon={
                   <motion.div
@@ -629,7 +627,7 @@ export default function Home() {
               />
             </Grid>
 
-            <Grid item xs={12} md={4}>
+            <Grid size={{ xs: 12, md: 4 }}>
               <FeatureCard
                 icon={
                   <motion.div
@@ -675,7 +673,7 @@ export default function Home() {
               />
             </Grid>
 
-            <Grid item xs={12} md={4}>
+            <Grid size={{ xs: 12, md: 4 }}>
               <FeatureCard
                 icon={
                   <motion.div
