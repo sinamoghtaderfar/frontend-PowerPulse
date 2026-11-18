@@ -9,7 +9,8 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     server: {
       proxy: {
-        "/forecast": { target: proxyTarget, changeOrigin: true },
+        // Only API sub-paths: "/forecast" itself is a client-side route.
+        "^/forecast/": { target: proxyTarget, changeOrigin: true },
       },
     },
     test: {
