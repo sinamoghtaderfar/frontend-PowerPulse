@@ -6,6 +6,7 @@ export default function ForecastError({ message, onRetry }) {
     <Container maxWidth="md" sx={{ py: 8 }}>
       <Alert
         severity="error"
+        role="alert"
         sx={{ 
           borderRadius: 2, 
           boxShadow: 1, 
@@ -16,6 +17,7 @@ export default function ForecastError({ message, onRetry }) {
             color="inherit" 
             size="small" 
             onClick={onRetry}
+            aria-label="Retry loading forecasts"
             sx={{ ml: 1 }}
           >
             <Refresh />
@@ -23,7 +25,7 @@ export default function ForecastError({ message, onRetry }) {
         }
       >
         <Typography variant="h6" gutterBottom>
-          <ErrorOutline sx={{ verticalAlign: "middle", mr: 1 }} />
+          <ErrorOutline aria-hidden sx={{ verticalAlign: "middle", mr: 1 }} />
           Error Loading Data
         </Typography>
         <Typography variant="body2">
