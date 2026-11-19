@@ -11,6 +11,7 @@ export default defineConfig(({ mode }) => {
       proxy: {
         // Only API sub-paths: "/forecast" itself is a client-side route.
         "^/forecast/": { target: proxyTarget, changeOrigin: true },
+        "^/health": { target: proxyTarget, changeOrigin: true },
       },
     },
     test: {

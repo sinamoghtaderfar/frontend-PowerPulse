@@ -1,16 +1,45 @@
-# React + Vite
+# PowerPulse frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite + Material UI dashboard for the
+[PowerPulse API](https://github.com/sinamoghtaderfar/api-Forecast-PowerPulse): forecasts of
+Germany's annual **electricity generation (TWh)** from Prophet, Random Forest and XGBoost.
 
-Currently, two official plugins are available:
+Pages: Overview, Model forecasts (`/forecast?model=prophet|random-forest|xgboost`), Compare
+models, Methodology. Custom forecasts are not supported by the API and are shown as unavailable.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## API contract used
 
-## React Compiler
+| Request | Use |
+|---|---|
+| `GET /forecast/all?years_ahead=N` (1–50) | Forecast rows, growth summaries, interval metadata |
+| `GET /health` | API status indicator |
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+Interval bounds (`lower`/`upper`) can be `null` beyond the calibrated horizon; charts then show
+the point forecast only. The API does not expose historical observations.
 
-## Expanding the ESLint configuration
+## Development
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm ci
+npm run dev        # http://localhost:5173, proxies /forecast/* and /health to the API
+npm run lint
+npm test           # Vitest + Testing Library
+npm run build
+```
+
+Start the API first (`python run.py` in the backend, port 8000).
+
+## Configuration
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `VITE_API_BASE_URL` | empty (same origin) | API origin for production builds, no trailing slash |
+| `VITE_DEV_API_PROXY_TARGET` | `http://localhost:8000` | Backend used by the dev/preview proxy |
+
+## Production checklist
+
+- Serve `dist/` with an SPA fallback to `index.html` for client routes.
+- Either set `VITE_API_BASE_URL` and add the frontend origin to the API's
+  `POWERPULSE_CORS_ORIGINS`, or reverse-proxy `/forecast/*` and `/health` to the API on the same
+  origin. Proxy only `/forecast/` sub-paths: `/forecast` itself is a frontend route.
+- The API must listen on a reachable interface (`POWERPULSE_HOST`, default `127.0.0.1`).
