@@ -86,6 +86,7 @@ const theme = createTheme({
           fontSize: "0.75rem",
           textTransform: "uppercase",
           letterSpacing: "0.04em",
+          whiteSpace: "nowrap",
         },
       },
     },

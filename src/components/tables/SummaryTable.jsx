@@ -24,13 +24,13 @@ export default function SummaryTable({ summaries, models, unit = FORECAST_UNIT }
             const s = summaries?.[model];
             return (
               <TableRow key={model} hover>
-                <TableCell component="th" scope="row">
+                <TableCell component="th" scope="row" sx={{ whiteSpace: "nowrap" }}>
                   <Box sx={{ display: "inline-flex", alignItems: "center", gap: 1, fontWeight: 600 }}>
                     <ModelDot model={model} />
                     {getModelDisplayName(model)}
                   </Box>
                 </TableCell>
-                <TableCell>{s?.period ?? "—"}</TableCell>
+                <TableCell sx={{ whiteSpace: "nowrap" }}>{s?.period ?? "—"}</TableCell>
                 <TableCell align="right">{formatValue(s?.startValue)}</TableCell>
                 <TableCell align="right">{formatValue(s?.endValue)}</TableCell>
                 <TableCell align="right">{formatPercent(s?.totalGrowthPercent)}</TableCell>

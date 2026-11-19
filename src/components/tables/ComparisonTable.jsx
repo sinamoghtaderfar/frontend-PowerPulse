@@ -36,7 +36,7 @@ export default function ComparisonTable({ rows, models, unit = FORECAST_UNIT }) 
                   <Typography variant="body2" className="tabular-nums" sx={{ fontWeight: 600 }}>
                     {formatValue(row[model])}
                   </Typography>
-                  <Typography variant="caption" className="tabular-nums" component="span">
+                  <Typography variant="caption" className="tabular-nums" component="span" sx={{ whiteSpace: "nowrap" }}>
                     {formatInterval(row[`${model}_lower`], row[`${model}_upper`])}
                   </Typography>
                 </TableCell>
